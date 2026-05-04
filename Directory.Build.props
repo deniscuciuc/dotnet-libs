@@ -20,4 +20,7 @@
     <CopyrightYear Condition="'$(CopyrightYear)' == ''">2026</CopyrightYear>
     <Copyright>© $(CopyrightYear) Denis Cuciuc</Copyright>
   </PropertyGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)LICENSE" Pack="true" PackagePath="" />
+  </ItemGroup>
 </Project>
