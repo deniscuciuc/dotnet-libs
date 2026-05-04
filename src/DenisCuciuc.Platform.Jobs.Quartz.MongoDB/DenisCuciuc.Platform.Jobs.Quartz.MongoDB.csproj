@@ -1,5 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+    <PropertyGroup>
+      <!-- Reddoxx.Quartz.MongoDbJobStore has no stable release yet -->
+      <NoWarn>$(NoWarn);NU5104</NoWarn>
+    </PropertyGroup>
+
     <ItemGroup>
         <PackageReference Include="Reddoxx.Quartz.MongoDbJobStore" />
         <PackageReference Include="Quartz.Serialization.SystemTextJson" />
