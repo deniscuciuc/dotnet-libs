@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <PackageReference Include="Hangfire.Mongo" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\DenisCuciuc.Platform.Jobs.Hangfire\DenisCuciuc.Platform.Jobs.Hangfire.csproj" />
+    </ItemGroup>
+
+</Project>

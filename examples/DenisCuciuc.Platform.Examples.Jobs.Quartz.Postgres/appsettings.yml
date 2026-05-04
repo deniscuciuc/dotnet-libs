@@ -1,0 +1,24 @@
+Jobs:
+  provider: quartz
+  store: postgres
+  maxRetries: 3
+  defaultTimeoutSeconds: 60
+
+Postgres:
+  connectionString: "Host=localhost;Port=5432;Database=deniscuciuc_platform_jobs;Username=postgres;Password=postgres"
+
+Serilog:
+  MinimumLevel:
+    Default: Information
+    Override:
+      Microsoft: Warning
+      Microsoft.Hosting.Lifetime: Information
+      Quartz: Warning
+  WriteTo:
+    - Name: Console
+      Args:
+        outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {SourceContext} {Message:lj}{NewLine}{Exception}"
+  Enrich:
+    - FromLogContext
+    - WithMachineName
+    - WithEnvironmentName

@@ -1,14 +1,21 @@
 <Project>
   <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
     <Authors>Denis Cuciuc</Authors>
+    <Company>Denis Cuciuc</Company>
+    <Version>1.0.0</Version>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <FileVersion>1.0.0</FileVersion>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageProjectUrl>https://github.com/deniscuciuc/dotnet-$([System.String]::Copy('$(MSBuildProjectName)').Replace('DenisCuciuc.', '').ToLowerInvariant())</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/deniscuciuc/dotnet-platform</PackageProjectUrl>
     <RepositoryUrl>$(PackageProjectUrl)</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>latest</LangVersion>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NoWarn>$(NoWarn);1591;1573</NoWarn>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <CopyrightYear Condition="'$(CopyrightYear)' == ''">2026</CopyrightYear>
     <Copyright>© $(CopyrightYear) Denis Cuciuc</Copyright>

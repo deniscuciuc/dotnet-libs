@@ -1,0 +1,24 @@
+Jobs:
+  provider: quartz
+  store: mongodb
+  maxRetries: 3
+  defaultTimeoutSeconds: 60
+
+MongoDB:
+  connectionString: "mongodb://localhost:27017/deniscuciuc-platform-jobs"
+
+Serilog:
+  MinimumLevel:
+    Default: Information
+    Override:
+      Microsoft: Warning
+      Microsoft.Hosting.Lifetime: Information
+      Quartz: Warning
+  WriteTo:
+    - Name: Console
+      Args:
+        outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {SourceContext} {Message:lj}{NewLine}{Exception}"
+  Enrich:
+    - FromLogContext
+    - WithMachineName
+    - WithEnvironmentName

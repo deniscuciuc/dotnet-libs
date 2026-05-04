@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <PackageReference Include="Reddoxx.Quartz.MongoDbJobStore" />
+        <PackageReference Include="Quartz.Serialization.SystemTextJson" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\DenisCuciuc.Platform.Jobs.Quartz\DenisCuciuc.Platform.Jobs.Quartz.csproj" />
+    </ItemGroup>
+
+</Project>

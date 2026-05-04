@@ -1,0 +1,85 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/examples/">
+    <Project Path="examples/DenisCuciuc.Platform.Examples.EfCoreApi/DenisCuciuc.Platform.Examples.EfCoreApi.csproj" />
+    <Project Path="examples/DenisCuciuc.Platform.Examples.Jobs.Hangfire.MongoDB/DenisCuciuc.Platform.Examples.Jobs.Hangfire.MongoDB.csproj" />
+    <Project Path="examples/DenisCuciuc.Platform.Examples.Jobs.Hangfire.Postgres/DenisCuciuc.Platform.Examples.Jobs.Hangfire.Postgres.csproj" />
+    <Project Path="examples/DenisCuciuc.Platform.Examples.Jobs.Quartz.MongoDB/DenisCuciuc.Platform.Examples.Jobs.Quartz.MongoDB.csproj" />
+    <Project Path="examples/DenisCuciuc.Platform.Examples.Jobs.Quartz.Postgres/DenisCuciuc.Platform.Examples.Jobs.Quartz.Postgres.csproj" />
+    <Project Path="examples/DenisCuciuc.Platform.Examples.Jobs/DenisCuciuc.Platform.Examples.Jobs.csproj" />
+    <Project Path="examples/DenisCuciuc.Platform.Examples.RabbitMq/DenisCuciuc.Platform.Examples.RabbitMq.csproj" />
+    <Project Path="examples/DenisCuciuc.Platform.Examples.StorageApi/DenisCuciuc.Platform.Examples.StorageApi.csproj" />
+    <Project Path="examples/DenisCuciuc.Platform.Examples.WebApi/DenisCuciuc.Platform.Examples.WebApi.csproj" />
+  </Folder>
+  <Folder Name="/src/" />
+  <Folder Name="/src/Foundation/">
+    <Project Path="src/DenisCuciuc.Platform.Cache/DenisCuciuc.Platform.Cache.csproj" />
+    <Project Path="src/DenisCuciuc.Platform.Configuration/DenisCuciuc.Platform.Configuration.csproj" />
+    <Project Path="src/DenisCuciuc.Platform.CQRS/DenisCuciuc.Platform.CQRS.csproj" />
+    <Project Path="src/DenisCuciuc.Platform.Domain/DenisCuciuc.Platform.Domain.csproj" />
+    <Project Path="src/DenisCuciuc.Platform.Startup/DenisCuciuc.Platform.Startup.csproj" />
+  </Folder>
+  <Folder Name="/src/Infrastructure/">
+    <Project Path="src/DenisCuciuc.Platform.MongoDB.Startup/DenisCuciuc.Platform.MongoDB.Startup.csproj" />
+    <Project Path="src/DenisCuciuc.Platform.MongoDB/DenisCuciuc.Platform.MongoDB.csproj" />
+    <Project Path="src/DenisCuciuc.Platform.MQ/DenisCuciuc.Platform.MQ.csproj" />
+    <Project Path="src/DenisCuciuc.Platform.Postgres.Startup/DenisCuciuc.Platform.Postgres.Startup.csproj" />
+    <Project Path="src/DenisCuciuc.Platform.Postgres/DenisCuciuc.Platform.Postgres.csproj" />
+    <Project Path="src/DenisCuciuc.Platform.Redis.Startup/DenisCuciuc.Platform.Redis.Startup.csproj" />
+    <Project Path="src/DenisCuciuc.Platform.Redis/DenisCuciuc.Platform.Redis.csproj" />
+  </Folder>
+  <Folder Name="/src/Jobs/">
+    <Project Path="src/DenisCuciuc.Platform.Jobs.Hangfire.MongoDB/DenisCuciuc.Platform.Jobs.Hangfire.MongoDB.csproj" />
+    <Project Path="src/DenisCuciuc.Platform.Jobs.Hangfire.Postgres/DenisCuciuc.Platform.Jobs.Hangfire.Postgres.csproj" />
+    <Project Path="src/DenisCuciuc.Platform.Jobs.Hangfire/DenisCuciuc.Platform.Jobs.Hangfire.csproj" />
+    <Project Path="src/DenisCuciuc.Platform.Jobs.Quartz.MongoDB/DenisCuciuc.Platform.Jobs.Quartz.MongoDB.csproj" />
+    <Project Path="src/DenisCuciuc.Platform.Jobs.Quartz.Postgres/DenisCuciuc.Platform.Jobs.Quartz.Postgres.csproj" />
+    <Project Path="src/DenisCuciuc.Platform.Jobs.Quartz/DenisCuciuc.Platform.Jobs.Quartz.csproj" />
+    <Project Path="src/DenisCuciuc.Platform.Jobs.Startup/DenisCuciuc.Platform.Jobs.Startup.csproj" />
+    <Project Path="src/DenisCuciuc.Platform.Jobs/DenisCuciuc.Platform.Jobs.csproj" />
+  </Folder>
+  <Folder Name="/src/Observability/">
+    <Project Path="src/DenisCuciuc.Platform.Metrics/DenisCuciuc.Platform.Metrics.csproj" />
+    <Project Path="src/DenisCuciuc.Platform.Sentry/DenisCuciuc.Platform.Sentry.csproj" />
+    <Project Path="src/DenisCuciuc.Platform.Serilog/DenisCuciuc.Platform.Serilog.csproj" />
+  </Folder>
+  <Folder Name="/src/Storage/">
+    <Project Path="src/DenisCuciuc.Platform.Storage.Abstractions/DenisCuciuc.Platform.Storage.Abstractions.csproj" />
+    <Project Path="src/DenisCuciuc.Platform.Storage.Disk/DenisCuciuc.Platform.Storage.Disk.csproj" />
+    <Project Path="src/DenisCuciuc.Platform.Storage.S3/DenisCuciuc.Platform.Storage.S3.csproj" />
+    <Project Path="src/DenisCuciuc.Platform.Storage.Startup/DenisCuciuc.Platform.Storage.Startup.csproj" />
+    <Project Path="src/DenisCuciuc.Platform.Storage/DenisCuciuc.Platform.Storage.csproj" />
+  </Folder>
+  <Folder Name="/src/Web/">
+    <Project Path="src/DenisCuciuc.Platform.ErrorHandling/DenisCuciuc.Platform.ErrorHandling.csproj" />
+    <Project Path="src/DenisCuciuc.Platform.HealthCheck/DenisCuciuc.Platform.HealthCheck.csproj" />
+    <Project Path="src/DenisCuciuc.Platform.Identity/DenisCuciuc.Platform.Identity.csproj" />
+    <Project Path="src/DenisCuciuc.Platform.Swagger.Theme/DenisCuciuc.Platform.Swagger.Theme.csproj" />
+    <Project Path="src/DenisCuciuc.Platform.Swagger/DenisCuciuc.Platform.Swagger.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/DenisCuciuc.Platform.Cache.Tests/DenisCuciuc.Platform.Cache.Tests.csproj" />
+    <Project Path="tests/DenisCuciuc.Platform.Configuration.Tests/DenisCuciuc.Platform.Configuration.Tests.csproj" />
+    <Project Path="tests/DenisCuciuc.Platform.CQRS.Tests/DenisCuciuc.Platform.CQRS.Tests.csproj" />
+    <Project Path="tests/DenisCuciuc.Platform.Domain.Tests/DenisCuciuc.Platform.Domain.Tests.csproj" />
+    <Project Path="tests/DenisCuciuc.Platform.ErrorHandling.Tests/DenisCuciuc.Platform.ErrorHandling.Tests.csproj" />
+    <Project Path="tests/DenisCuciuc.Platform.HealthCheck.Tests/DenisCuciuc.Platform.HealthCheck.Tests.csproj" />
+    <Project Path="tests/DenisCuciuc.Platform.Identity.Tests/DenisCuciuc.Platform.Identity.Tests.csproj" />
+    <Project Path="tests/DenisCuciuc.Platform.Jobs.Hangfire.Tests/DenisCuciuc.Platform.Jobs.Hangfire.Tests.csproj" />
+    <Project Path="tests/DenisCuciuc.Platform.Jobs.Quartz.Tests/DenisCuciuc.Platform.Jobs.Quartz.Tests.csproj" />
+    <Project Path="tests/DenisCuciuc.Platform.Jobs.Tests/DenisCuciuc.Platform.Jobs.Tests.csproj" />
+    <Project Path="tests/DenisCuciuc.Platform.Metrics.Tests/DenisCuciuc.Platform.Metrics.Tests.csproj" />
+    <Project Path="tests/DenisCuciuc.Platform.MongoDB.Integration.Tests/DenisCuciuc.Platform.MongoDB.Integration.Tests.csproj" />
+    <Project Path="tests/DenisCuciuc.Platform.MQ.Tests/DenisCuciuc.Platform.MQ.Tests.csproj" />
+    <Project Path="tests/DenisCuciuc.Platform.Postgres.Tests/DenisCuciuc.Platform.Postgres.Tests.csproj" />
+    <Project Path="tests/DenisCuciuc.Platform.Redis.Integration.Tests/DenisCuciuc.Platform.Redis.Integration.Tests.csproj" />
+    <Project Path="tests/DenisCuciuc.Platform.Sentry.Tests/DenisCuciuc.Platform.Sentry.Tests.csproj" />
+    <Project Path="tests/DenisCuciuc.Platform.Serilog.Tests/DenisCuciuc.Platform.Serilog.Tests.csproj" />
+    <Project Path="tests/DenisCuciuc.Platform.Startup.Tests/DenisCuciuc.Platform.Startup.Tests.csproj" />
+    <Project Path="tests/DenisCuciuc.Platform.Storage.Tests/DenisCuciuc.Platform.Storage.Tests.csproj" />
+  </Folder>
+</Solution>
