@@ -7,7 +7,6 @@ obj/
 TestResults/
 *.user
 *.suo
-*.cache
 
 artifacts/
 nupkg/
@@ -20,6 +19,3 @@ packages/
 coverage/
 *.coverage
 *.coveragexml
-
-# *.cache would match DenisCuciuc.Platform.Cache/ on case-insensitive filesystems
-!src/DenisCuciuc.Platform.Cache/

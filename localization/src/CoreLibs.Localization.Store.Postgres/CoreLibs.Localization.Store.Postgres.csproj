@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <Description>PostgreSQL store for CoreLibs Localization — optional persistent storage via raw Npgsql and Dapper.</Description>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Dapper"/>
+        <PackageReference Include="Npgsql"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions"/>
+        <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions"/>
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\CoreLibs.Localization\CoreLibs.Localization.csproj"/>
+        <ProjectReference Include="..\..\..\platform\src\CoreLibs.Postgres\CoreLibs.Postgres.csproj"/>
+        <ProjectReference Include="..\..\..\platform\src\CoreLibs.Startup\CoreLibs.Startup.csproj"/>
+    </ItemGroup>
+</Project>

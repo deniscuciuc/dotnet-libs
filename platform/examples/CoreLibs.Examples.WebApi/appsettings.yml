@@ -1,0 +1,27 @@
+MongoDB:
+  connectionString: "mongodb://localhost:27017/corelibs-example"
+  databaseName: "corelibs-example"
+  minConnectionPoolSize: 5
+  maxConnectionPoolSize: 100
+
+Redis:
+  connectionString: "localhost:6379,resolveDns=true"
+
+Sentry:
+  enabled: false
+  dsn: ""
+
+Metrics:
+  enabled: true
+  endpointPath: "/metrics"
+
+Cqrs:
+  defaultBatchMaxSize: 100
+
+Serilog:
+  MinimumLevel:
+    Default: Information
+    Override:
+      Microsoft.AspNetCore: Warning
+  WriteTo:
+    - Name: Console

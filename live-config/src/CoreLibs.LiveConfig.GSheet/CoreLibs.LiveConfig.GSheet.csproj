@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <Description>Google Sheets config source for the CoreLibs LiveConfig framework. Includes CSV parsing, importer orchestration, and CsvHelper converters.</Description>
+        <NoWarn>$(NoWarn);0618</NoWarn>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <InternalsVisibleTo Include="CoreLibs.LiveConfig.UnitTests"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="CsvHelper"/>
+        <PackageReference Include="Google.Apis.Sheets.v4"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions"/>
+        <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\CoreLibs.LiveConfig\CoreLibs.LiveConfig.csproj"/>
+    </ItemGroup>
+
+</Project>

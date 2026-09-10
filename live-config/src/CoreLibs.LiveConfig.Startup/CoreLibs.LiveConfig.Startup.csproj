@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <Description>DI wiring, auto-discovery, and startup preloading for the CoreLibs LiveConfig framework.</Description>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions"/>
+        <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions"/>
+        <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\CoreLibs.LiveConfig\CoreLibs.LiveConfig.csproj"/>
+        <ProjectReference Include="..\CoreLibs.LiveConfig.Observability\CoreLibs.LiveConfig.Observability.csproj"/>
+        <ProjectReference Include="..\..\..\platform\src\CoreLibs.Startup\CoreLibs.Startup.csproj"/>
+    </ItemGroup>
+
+</Project>

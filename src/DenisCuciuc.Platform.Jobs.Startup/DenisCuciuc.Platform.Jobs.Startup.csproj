@@ -1,8 +1,0 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-    <ItemGroup>
-        <ProjectReference Include="..\DenisCuciuc.Platform.Jobs\DenisCuciuc.Platform.Jobs.csproj" />
-        <ProjectReference Include="..\DenisCuciuc.Platform.Startup\DenisCuciuc.Platform.Startup.csproj" />
-    </ItemGroup>
-
-</Project>

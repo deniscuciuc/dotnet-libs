@@ -1,0 +1,25 @@
+{
+  "culture": "en",
+  "entries": {
+    "app.welcome": {
+      "value": "Welcome to CoreLibs Localization!"
+    },
+    "app.greeting": {
+      "value": "Hello, {name}!"
+    },
+    "game.items.count": {
+      "value": "Items: {count}",
+      "plurals": {
+        "zero": "No items",
+        "one": "{count} item",
+        "other": "{count} items"
+      }
+    },
+    "offers.bonus.received": {
+      "value": "You received a bonus of {amount} {currency}!"
+    },
+    "telegram.bot.welcome": {
+      "value": "Hello, {username}! Your language: {culture}."
+    }
+  }
+}

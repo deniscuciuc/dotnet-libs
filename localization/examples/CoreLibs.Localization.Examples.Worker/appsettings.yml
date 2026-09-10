@@ -1,0 +1,68 @@
+localization:
+  defaultCulture: en
+  fallbackChain:
+    - ru
+    - en
+  logMissingKeys: true
+  returnKeyOnMissing: true
+  cache:
+    keyPrefix: localization
+    expiry: "01:00:00"
+liveconfig:
+  enablePreload: true
+  preloadSourceName: localization-json
+  criticalConfigTypes:
+    - localization:ru
+    - localization:en
+  gsheet:
+    spreadsheetId: "YOUR_GOOGLE_SPREADSHEET_ID"
+    # Supported methods: Path, Base64JsonFromConfiguration, CredentialsBase64Env
+    # Override via env: LIVECONFIG__GSHEET__CREDENTIALS__VALUE
+    credentials:
+      method: Path
+      value: "secrets/gsheet-credentials.json"
+
+Example:
+  # json   → warm up in-memory cache from locales/*.json at startup (default, no external services required)
+  # store  → warm up from persistent store at startup (requires StoreEnabled = true)
+  # none   → no warmup; rely entirely on LiveConfig push
+  SourceMode: store
+
+  # true → registers persistent store and /store/* endpoints
+  StoreEnabled: true
+
+  # mongo    → use MongoDB store (requires MongoDB section)
+  # postgres → use PostgreSQL store via EF Core (requires Postgres section)
+  StoreType: postgres
+
+  # true → registers Redis distributed cache (AddCoreLocalizationRedisCache)
+  # Requires Redis section to be set.
+  RedisCacheEnabled: true
+
+  # true → enables LiveConfig framework integration (IConfigSource → IConfigStore → IConfigApplier pipeline)
+  # When enabled, the /liveconfig/* endpoints become available for import, manifest, and rollback.
+  LiveConfigEnabled: true
+
+  Cultures:
+    - ru
+    - en
+    - de
+
+# Override via env: MONGODB__CONNECTIONSTRING
+MongoDB:
+  ConnectionString: mongodb://localhost:27017/localization_example
+
+# ── PostgreSQL (used when StoreType = postgres) ─
+# Override via env: POSTGRES__CONNECTIONSTRING
+Postgres:
+  ConnectionString: Host=localhost;Port=5432;Database=localization_example;Username=postgres;Password=postgres
+
+# Override via env: REDIS__CONNECTIONSTRING
+Redis:
+  ConnectionString: localhost:6379
+
+Logging:
+  LogLevel:
+    Default: Information
+    Microsoft.AspNetCore: Warning
+

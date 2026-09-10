@@ -1,133 +1,188 @@
-# DenisCuciuc.Platform
+# CoreLibs
 
-Modular .NET 10 platform libraries for configuration, startup orchestration,
-data access, messaging, identity, storage, jobs, observability, and common web
-service infrastructure.
+[![CI](https://github.com/deniscuciuc/dotnet-libs/actions/workflows/ci.yml/badge.svg)](https://github.com/deniscuciuc/dotnet-libs/actions/workflows/ci.yml)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![.NET](https://img.shields.io/badge/.NET-10.0-512BD4.svg)](https://dotnet.microsoft.com/download/dotnet/10.0)
 
-This repository was migrated from the legacy internal platform and adapted to
-the open-source Denis Cuciuc library stack. Package and namespace roots now use
-`DenisCuciuc.Platform.*`, and the configuration schema uses raw section names
-such as `MongoDB`, `Redis`, `Cqrs`, and `Jobs`.
+> Shared .NET service infrastructure — consumed as a git submodule, not from NuGet.
 
-## Installation
+Three libraries that most of my .NET services are built on. They are deliberately **not
+published to NuGet**: they are opinionated, they move with the services that use them, and a
+submodule lets a change land in a consumer the same day it is written rather than a release
+later.
 
-Use NuGet packages for stable consumption.
+| Module | Namespace | What it is |
+|---|---|---|
+| [`platform/`](#platform) | `CoreLibs.*` | Configuration, startup orchestration, CQRS, persistence, jobs, storage, identity, observability |
+| [`live-config/`](#liveconfig) | `CoreLibs.LiveConfig.*` | Hot-reloadable runtime configuration from JSON, Google Sheets, Redis, MongoDB and Postgres |
+| [`localization/`](#localization) | `CoreLibs.Localization.*` | Database-backed runtime localization with LiveConfig and Telegram adapters |
+
+Targets **net10.0**. Building needs the **.NET 10 SDK** (pinned in [`global.json`](global.json)).
+
+## Consuming it
+
+Add the repository as a submodule, then reference the projects you need by relative path.
 
 ```bash
-dotnet add package DenisCuciuc.Platform.Startup
-dotnet add package DenisCuciuc.Platform.Configuration
-```
-
-For active development across multiple packages, consume this repository as a
-git submodule and reference the specific projects you need.
-
-```bash
-git submodule add https://github.com/deniscuciuc/dotnet-platform libs/dotnet-platform
+git submodule add https://github.com/deniscuciuc/dotnet-libs libs/dotnet-libs
+git submodule update --init --recursive
 ```
 
 ```xml
 <ItemGroup>
-  <ProjectReference Include="libs/dotnet-platform/src/DenisCuciuc.Platform.Startup/DenisCuciuc.Platform.Startup.csproj" />
-  <ProjectReference Include="libs/dotnet-platform/src/DenisCuciuc.Platform.Configuration/DenisCuciuc.Platform.Configuration.csproj" />
+  <ProjectReference Include="libs/dotnet-libs/platform/src/CoreLibs.Startup/CoreLibs.Startup.csproj" />
+  <ProjectReference Include="libs/dotnet-libs/platform/src/CoreLibs.MongoDB/CoreLibs.MongoDB.csproj" />
+  <ProjectReference Include="libs/dotnet-libs/live-config/src/CoreLibs.LiveConfig.Startup/CoreLibs.LiveConfig.Startup.csproj" />
 </ItemGroup>
 ```
 
-## Packages
+Pin the submodule to a tag rather than tracking `main` if you want reproducible builds:
 
-| Package | Description |
-| --- | --- |
-| `DenisCuciuc.Platform.Configuration` | YAML config pipeline with convention-based typed options |
-| `DenisCuciuc.Platform.Startup` | Ordered startup orchestration before `Host.RunAsync` |
-| `DenisCuciuc.Platform.MongoDB` | MongoDB repository pattern, migrations, seeding, CAS/actor support |
-| `DenisCuciuc.Platform.Postgres` | PostgreSQL and EF Core registration helpers |
-| `DenisCuciuc.Platform.Redis` | Redis client, `ICache`, and composite caching |
-| `DenisCuciuc.Platform.Cache` | Cache abstractions and shared caching primitives |
-| `DenisCuciuc.Platform.MQ` | RabbitMQ integration through MassTransit |
-| `DenisCuciuc.Platform.CQRS` | MediatR, validation, and ErrorOr request pipeline |
-| `DenisCuciuc.Platform.Identity` | Multi-scheme token validation and identity helpers |
-| `DenisCuciuc.Platform.Storage` | File storage facade with disk and S3 providers |
-| `DenisCuciuc.Platform.ErrorHandling` | Exception middleware and `ErrorOr` to `IResult` mapping |
-| `DenisCuciuc.Platform.HealthCheck` | Health endpoint helpers |
-| `DenisCuciuc.Platform.Swagger` | Swagger UI and OpenAPI wiring |
-| `DenisCuciuc.Platform.Swagger.Theme` | Styled Swagger theme integration |
-| `DenisCuciuc.Platform.Serilog` | Structured logging and request logging helpers |
-| `DenisCuciuc.Platform.Sentry` | Sentry and OpenTelemetry integration |
-| `DenisCuciuc.Platform.Metrics` | Prometheus and OpenTelemetry metrics |
-| `DenisCuciuc.Platform.Jobs` | Shared abstractions for background jobs |
-| `DenisCuciuc.Platform.Domain` | Base domain types and domain-event primitives |
+```bash
+git -C libs/dotnet-libs checkout v2.0.0
+```
 
-## Quick start
+To update later:
+
+```bash
+git submodule update --remote libs/dotnet-libs
+```
+
+### Why not NuGet
+
+These packages are shaped around one set of conventions — an ordered `IStartup` pipeline, a
+YAML configuration layout, a MongoDB repository pattern. Publishing them would imply an API
+stability promise that would slow the services down for no one's benefit. If you want a
+standalone, versioned, `dotnet add package` library from this account, see
+[BotForge](https://github.com/deniscuciuc/botforge),
+[FluentDocs](https://github.com/deniscuciuc/fluentdocs) and
+[Rulebook](https://github.com/deniscuciuc/rulebook) instead — none of those depends on this
+repository.
+
+## Platform
+
+Configuration, host startup, and the infrastructure a service usually needs on day one.
 
 ```csharp
 var builder = WebApplication.CreateBuilder(args);
 
-builder.AddPlatformConfiguration();
-builder.Host.UsePlatformSerilog();
-builder.AddPlatformSentry();
-
-builder.Services.AddPlatformMetrics(builder.Configuration);
-builder.Services.AddMongoDB(builder.Configuration);
-builder.Services.AddPlatformRedis(builder.Configuration);
-builder.Services.AddPlatformRabbitMq(
-    builder.Configuration,
-    cfg => cfg.AddConsumer<OrderCreatedConsumer>());
-builder.Services.AddPlatformCqrsFromAssemblyOf<Program>(builder.Configuration);
-builder.Services.AddPlatformIdentity(builder.Configuration);
-builder.Services.AddPlatformFileStorage(builder.Configuration);
-
-builder.Services.AddPlatformMongoDBStartup();
-builder.Services.AddPlatformRedisStartup();
-builder.Services.AddPlatformStorageStartup();
+builder.AddCoreConfiguration();          // YAML pipeline + convention-bound typed options
+builder.Host.UseCoreSerilog();
+builder.Services.AddCoreMongoDBStartup();
+builder.Services.AddCoreCqrsFromAssemblyOf<Program>();
 
 var app = builder.Build();
+app.UseCoreCorrelationId();
+app.MapCoreMetrics();
 
-app.UsePlatformHealthChecks();
-app.MapPlatformMetrics();
-
-await app.RunWithStartupAsync();
+await app.RunWithStartupAsync();         // ordered startup tasks run before the host serves
 ```
 
-## Documentation
+| Project | Purpose |
+|---|---|
+| `CoreLibs.Configuration` | YAML configuration pipeline with convention-based typed options |
+| `CoreLibs.Startup` | Ordered startup orchestration and fail-fast guards before `Host.RunAsync` |
+| `CoreLibs.Domain` | `Entity`, domain events, auditing and soft-delete primitives |
+| `CoreLibs.CQRS` | MediatR + FluentValidation + ErrorOr request pipeline with caching behaviours |
+| `CoreLibs.Cache` | Cache abstractions shared by the Redis and Mongo layers |
+| `CoreLibs.MongoDB` | Repository pattern, indexes, migrations, seeding, CAS/actor support |
+| `CoreLibs.Postgres` | EF Core and Npgsql registration with naming conventions |
+| `CoreLibs.Redis` | `ICache` over StackExchange.Redis, plus composite caching |
+| `CoreLibs.MQ` | RabbitMQ via MassTransit |
+| `CoreLibs.Identity` | JWT plus Firebase, Auth0, Telegram-login and internal-secret validators |
+| `CoreLibs.Storage[.Disk|.S3]` | File storage facade with disk and S3 providers |
+| `CoreLibs.Jobs[.Hangfire|.Quartz]` | Background jobs with MongoDB and Postgres stores |
+| `CoreLibs.ErrorHandling` | Exception middleware and `ErrorOr` → `IResult` mapping |
+| `CoreLibs.HealthCheck`, `.Metrics`, `.Serilog`, `.Sentry` | Observability |
+| `CoreLibs.Swagger.Theme` | Swashbuckle registration with a dark theme |
 
-- [Getting started](docs/getting-started.md)
-- [Configuration](docs/configuration.md)
-- [Startup](docs/startup.md)
-- [MongoDB](docs/mongodb.md)
-- [Postgres](docs/postgres.md)
-- [Redis](docs/redis.md)
-- [Identity](docs/identity.md)
-- [Messaging](docs/messaging.md)
-- [Storage](docs/storage.md)
-- [Observability](docs/observability.md)
-- [Release process](docs/release-process.md)
-- [Changelog](CHANGELOG.md)
+Every component ships a matching `*.Startup` project that registers it into the startup
+orchestrator. Docs: [`platform/docs/`](platform/docs/).
 
-## Examples
+## LiveConfig
 
-Working examples are available under `examples/`, including Web API, RabbitMQ,
-worker, storage, and Hangfire and Quartz job setups backed by MongoDB or
-Postgres.
+Configuration that changes while the process is running, without a redeploy.
 
-## Validation
+Sources (`IConfigSource`) produce snapshots, `IConfigStore` versions them, `IConfigDistributor`
+fans changes across instances over Redis pub/sub, and `IConfigApplier`/`IConfigHook`
+implementations — discovered by attribute — apply them into typed caches.
+
+| Project | Purpose |
+|---|---|
+| `CoreLibs.LiveConfig.Abstractions` | Contracts and attributes |
+| `CoreLibs.LiveConfig` | Engine, hashing and snapshot pipeline |
+| `CoreLibs.LiveConfig.Json` | JSON and YAML file sources |
+| `CoreLibs.LiveConfig.GSheet` | Google Sheets source, entity API and schema mapping |
+| `CoreLibs.LiveConfig.Redis` | Cross-instance distribution |
+| `CoreLibs.LiveConfig.Store.MongoDB`, `.Store.Postgres` | Versioned persistence with retention |
+| `CoreLibs.LiveConfig.Startup` | Auto-discovery and preload |
+| `CoreLibs.LiveConfig.Hosting` | Standalone config-manager host with MassTransit |
+| `CoreLibs.LiveConfig.Observability` | OpenTelemetry metrics |
+
+Docs: [`live-config/docs/`](live-config/docs/). Runnable example:
+[`live-config/examples/`](live-config/examples/).
+
+## Localization
+
+Runtime i18n backed by a database rather than resx, so translators change strings without a
+build.
+
+```csharp
+services.AddCoreLocalization(o =>
+{
+    o.DefaultCulture = "en";
+    o.FallbackChain = ["ro", "en"];
+});
+
+// later
+localizer.Get("cart.empty", "ro");
+localizer.GetPlural("cart.items", "ro", count: 3);
+```
+
+| Project | Purpose |
+|---|---|
+| `CoreLibs.Localization` | Dependency-free contracts and value types |
+| `CoreLibs.Localization.Runtime` | Localizer, atomically-swapped cache, interpolation, CLDR pluralization |
+| `CoreLibs.Localization.Cache` | Redis decorator for cross-instance sync and cold start |
+| `CoreLibs.Localization.Store.MongoDB`, `.Store.Postgres` | Persistence |
+| `CoreLibs.Localization.LiveConfig[.Json|.GSheet]` | Rebuild the cache from LiveConfig sources |
+| `CoreLibs.Localization.Telegram` | Language detection from a Telegram user |
+
+Docs: [`localization/docs/`](localization/docs/).
+
+## Building and testing
 
 ```bash
-dotnet build --configuration Release
-dotnet test --configuration Release
-dotnet format --verify-no-changes --no-restore
+dotnet restore CoreLibs.slnx
+dotnet build CoreLibs.slnx -c Release
+dotnet test CoreLibs.slnx -c Release
 ```
 
-## Release model
+The integration suites use [Testcontainers](https://testcontainers.com/) and need a working
+Docker or Podman socket. They start MongoDB, Postgres and Redis themselves — no local
+services required.
 
-CI always restores, builds, tests, and format-checks the repo. Publishing is
-manual through the `Release` GitHub Actions workflow.
+## Third-party licensing
 
-- The workflow always builds and packs the repository.
-- NuGet publishing is opt-in through the `publish_nuget` input.
-- GitHub Release creation is opt-in through the `create_github_release` input.
-- Release notes for the publish snapshot live in `CHANGELOG.md`.
+Two dependencies are worth knowing about before you ship something built on this:
+
+- **Hangfire** (`CoreLibs.Jobs.Hangfire`) is **LGPL-3.0 with a commercial option**. Using it
+  as an unmodified NuGet package in a closed-source service is generally fine; redistributing
+  a modified Hangfire is not. If that is a problem, use `CoreLibs.Jobs.Quartz` instead —
+  Quartz.NET is Apache-2.0 and the `IJobScheduler` abstraction is the same either way.
+- **MediatR** (`CoreLibs.CQRS`) is pinned to **12.1.1**, the last Apache-2.0 release. v13
+  moved to a paid commercial license. The pin is deliberate; do not let a dependency update
+  cross it without a decision.
+
+Everything else is MIT, Apache-2.0 or BSD.
+
+## Contributing
+
+Releases are git tags, not packages — see [docs/release-process.md](docs/release-process.md).
+
+See [CONTRIBUTING.md](CONTRIBUTING.md), [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) and
+[SECURITY.md](SECURITY.md).
 
 ## License
 
-[PolyForm Strict](LICENSE)
-
-Commercial use requires permission. Contact: <denis@deniscuciuc.dev>
+[MIT](LICENSE)

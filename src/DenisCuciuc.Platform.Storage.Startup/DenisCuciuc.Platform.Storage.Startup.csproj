@@ -1,9 +1,0 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-    <ItemGroup>
-        <ProjectReference Include="..\DenisCuciuc.Platform.Storage\DenisCuciuc.Platform.Storage.csproj" />
-        <ProjectReference Include="..\DenisCuciuc.Platform.Storage.Abstractions\DenisCuciuc.Platform.Storage.Abstractions.csproj" />
-        <ProjectReference Include="..\DenisCuciuc.Platform.Startup\DenisCuciuc.Platform.Startup.csproj" />
-    </ItemGroup>
-
-</Project>

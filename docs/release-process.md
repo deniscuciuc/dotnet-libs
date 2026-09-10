@@ -1,53 +1,45 @@
-# Release Process
+# Release process
 
-## CI
+There are no packages to publish. A "release" here is a git tag on `main` that consumers
+point their submodule at.
 
-The `CI` workflow runs on pushes and pull requests targeting `main`.
+## Cutting a release
 
-It performs:
+1. Make sure `main` is green: format, build and test on Linux and Windows, plus the
+   integration suites.
+2. Move the `## [Unreleased]` entries in [`CHANGELOG.md`](../CHANGELOG.md) into a new
+   version section with today's date, and update the link definitions at the bottom.
+3. Commit, then tag and push:
 
-1. `dotnet restore`
-2. `dotnet build --configuration Release`
-3. `dotnet test --configuration Release`
-4. `dotnet format --verify-no-changes --no-restore`
+   ```bash
+   git tag -a v2.1.0 -m "v2.1.0"
+   git push origin main --follow-tags
+   ```
 
-## Manual release workflow
+4. Create the GitHub release from the tag, using the changelog section as the notes:
 
-Publishing is intentionally manual through `.github/workflows/release.yml`.
+   ```bash
+   gh release create v2.1.0 --title v2.1.0 --notes-file <(
+     awk '/^## \[2\.1\.0\]/{f=1;next} f&&/^## \[/{exit} f' CHANGELOG.md)
+   ```
 
-The workflow accepts three inputs:
+## Versioning
 
-1. `version` - package version to build
-2. `publish_nuget` - whether to push packages to NuGet.org
-3. `create_github_release` - whether to create a GitHub release with the built packages attached
+[Semantic versioning](https://semver.org/), applied to the repository as a whole — the three
+modules are tagged together because they reference each other by project path.
 
-Every run always builds, tests, packs, and uploads the generated `.nupkg`
-artifacts. Publishing and GitHub release creation are opt-in.
+Because consumers track this repository by submodule, a breaking change is felt the moment
+someone runs `git submodule update --remote`. Anything that renames a public type, changes a
+configuration section name, or changes a registration method's behaviour is a major bump, and
+the changelog entry has to say what a consumer must do.
 
-## Local release validation
+## Updating a consumer
 
 ```bash
-dotnet restore
-dotnet build --configuration Release
-dotnet test --configuration Release
-dotnet pack \
- --configuration Release \
- -p:PackageVersion=1.0.0 \
- -o .\artifacts
+cd libs/dotnet-libs
+git fetch --tags
+git checkout v2.1.0
+cd -
+git add libs/dotnet-libs
+git commit -m "chore: bump dotnet-libs to v2.1.0"
 ```
-
-## Publish from GitHub Actions
-
-To publish from the workflow, configure:
-
-1. `NUGET_API_KEY` as a repository secret when `publish_nuget` is enabled
-2. `contents: write` permission for GitHub release creation, which is already declared in the workflow
-
-## Recommended release flow
-
-1. Update `CHANGELOG.md` so the publish snapshot is documented before tagging or packing.
-2. Update the shared version metadata in `Directory.Build.props` if you want the repo default to move forward.
-3. Merge the intended release state to `main`.
-4. Run the `Release` workflow manually with the target version.
-5. Enable `publish_nuget` only when you want to push packages.
-6. Enable `create_github_release` when you want a tagged GitHub release and attached artifacts.

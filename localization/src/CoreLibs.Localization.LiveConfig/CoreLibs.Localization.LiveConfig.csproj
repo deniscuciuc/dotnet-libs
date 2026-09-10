@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <Description>LiveConfig integration for CoreLibs Localization — subscribes to config updates, deserializes LocalizationSnapshot, atomically rebuilds in-memory cache.</Description>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions"/>
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\CoreLibs.Localization.Runtime\CoreLibs.Localization.Runtime.csproj"/>
+        <ProjectReference Include="..\..\..\live-config\src\CoreLibs.LiveConfig.Abstractions\CoreLibs.LiveConfig.Abstractions.csproj"/>
+    </ItemGroup>
+</Project>

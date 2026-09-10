@@ -1,66 +1,94 @@
-# Contributing
+# Contributing to CoreLibs
 
-## Contributor License Agreement
+## Prerequisites
 
-By submitting a pull request to this repository you agree that:
+- [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0) — the exact version is
+  pinned in [`global.json`](global.json)
+- Docker or Podman, for the integration tests
+- An editor that honours `.editorconfig`
 
-1. You own the contribution and it does not violate any third-party IP rights.
-2. You grant Denis Cuciuc a perpetual, worldwide, royalty-free license to use,
-   modify, sublicense, and distribute your contribution under any license.
-3. Your contribution may be used in commercial products.
+## Setup
 
-To formally sign the CLA, add your name to CLAs/signed.md in your PR:
+```bash
+git clone https://github.com/deniscuciuc/dotnet-libs.git
+cd dotnet-libs
+dotnet restore CoreLibs.slnx
+```
 
-Your Name (@github-username) - YYYY-MM-DD
+## Building and testing
 
-## Branch naming
+```bash
+dotnet build CoreLibs.slnx -c Release
+dotnet test CoreLibs.slnx -c Release
+```
 
-feat/short-description
-fix/short-description
-docs/short-description
-refactor/short-description
-test/short-description
-chore/short-description
+The integration suites (`*.Integration.Tests`, `*.IntegrationTests`) start MongoDB, Postgres
+and Redis via Testcontainers. With Podman, point Testcontainers at the socket first:
 
-Examples:
-feat/add-bulk-insert
-fix/transaction-rollback
-docs/update-quickstart
+```bash
+export DOCKER_HOST=unix:///run/user/$(id -u)/podman/podman.sock
+```
 
-## Commit convention
+Run only the unit suites while iterating:
 
-Follow [Conventional Commits](https://www.conventionalcommits.org):
-feat: add bulk insert support
-fix: correct transaction rollback on timeout
-docs: update quickstart example
-test: add coverage for edge cases
-refactor: extract pipeline builder
-chore: bump dependencies
-
-Breaking changes:
-feat!: rename IRepository to IDataRepository
-BREAKING CHANGE: IRepository has been renamed to IDataRepository.
-Update all references accordingly.
-
-## Pull requests
-
-- Branch from `main`, target `main`
-- One concern per PR - do not mix features with refactoring
-- PR title must follow commit convention: `feat: add bulk insert support`
-- All CI checks must pass before merge
-- Add or update tests for every change
-- Coverage must not decrease - PRs that drop coverage will be rejected
-- Update `CHANGELOG.md` under the `[Unreleased]` section
-- Sign the CLA in `CLAs/signed.md` if this is your first contribution
-
-## Tests
-
-- All changes must include tests
-- Coverage must not decrease
-- See language-specific setup in `README.md`
+```bash
+for p in $(find . -name '*.csproj' | grep -i test | grep -vi integration); do
+  dotnet test "$p" -c Release
+done
+```
 
 ## Code style
 
-- Follow the repository formatter and linter configuration
-- Keep public API documentation at the standard expected by the language ecosystem
-- No warnings or failing checks in CI
+Enforced by the build and by `dotnet format --verify-no-changes` in CI:
+
+- `net10.0`, `LangVersion latest`, nullable reference types and implicit usings on
+- `TreatWarningsAsErrors` — no warnings in `src/`
+- File-scoped namespaces, one namespace per project, matching the project name
+- XML doc comments on public types and members
+- `ArgumentNullException.ThrowIfNull` for guards; no `#region` blocks
+- Prefer primary constructors for DI, `readonly` fields, and read-only collection types in
+  public signatures
+
+## Repository layout
+
+Each module owns its `src/`, `tests/`, `examples/`, `docs/` and its own
+`Directory.Packages.props`. The root `Directory.Packages.props` holds only repo-wide
+transitive security pins and is imported by each module. Add a package version to the module
+that uses it, not to the root.
+
+Project name, folder name, assembly name and root namespace are all the same string, and
+none of them is declared explicitly — renaming the folder and the `.csproj` is the whole
+rename. Keep it that way.
+
+## Adding a project
+
+1. `dotnet new classlib -o platform/src/CoreLibs.YourThing -n CoreLibs.YourThing`
+2. Strip the generated `.csproj` down to the SDK element plus its references — everything
+   else is inherited from `Directory.Build.props`.
+3. Add it to `CoreLibs.slnx`.
+4. If it registers services into the startup orchestrator, add a matching
+   `CoreLibs.YourThing.Startup` project rather than putting startup logic in the library.
+5. Add `platform/tests/CoreLibs.YourThing.Tests`.
+6. Document it in `platform/docs/` and add a row to the table in `README.md`.
+
+## Pull requests
+
+- Keep a PR to a single concern.
+- New behaviour and bug fixes need tests.
+- Conventional commits: `feat(mongodb): …`, `fix(startup): …`, `docs(readme): …`.
+- Note breaking changes in `CHANGELOG.md`. Because consumers track this repository by
+  submodule, a breaking change is felt the moment someone moves their pointer — say what
+  they have to do.
+- CI must be green: format, build and test on Linux and Windows, plus the integration suites.
+
+## Releasing
+
+See [docs/release-process.md](docs/release-process.md). Releases are git tags; there is
+nothing to publish.
+
+## Third-party licensing
+
+Before adding a dependency, check its license. This repository is MIT and intends to stay
+easy to consume. `Hangfire` (LGPL-3.0 or commercial) and the deliberate `MediatR 12.1.1` pin
+are documented in the README — do not let a dependency update cross the MediatR pin without
+a decision.

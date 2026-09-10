@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection"/>
+        <PackageReference Include="Microsoft.Extensions.Logging"/>
+        <PackageReference Include="Microsoft.NET.Test.Sdk"/>
+        <PackageReference Include="NSubstitute"/>
+        <PackageReference Include="xunit"/>
+        <PackageReference Include="xunit.runner.visualstudio"/>
+        <PackageReference Include="coverlet.collector"/>
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\CoreLibs.Localization\CoreLibs.Localization.csproj"/>
+        <ProjectReference Include="..\..\src\CoreLibs.Localization.Runtime\CoreLibs.Localization.Runtime.csproj"/>
+        <ProjectReference Include="..\..\src\CoreLibs.Localization.LiveConfig\CoreLibs.Localization.LiveConfig.csproj"/>
+        <ProjectReference Include="..\..\src\CoreLibs.Localization.LiveConfig.GSheet\CoreLibs.Localization.LiveConfig.GSheet.csproj"/>
+    </ItemGroup>
+</Project>

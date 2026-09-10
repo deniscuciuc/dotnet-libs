@@ -2,39 +2,106 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: ['**']
   pull_request:
     branches: [main]
 
+# A push and a pull_request event fire for the same commit on a PR branch, and a new push
+# supersedes the previous run.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  DOTNET_NOLOGO: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+
 jobs:
-  build-and-test:
+  format:
+    name: Format
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
         with:
-          dotnet-version: 10.0.x
+          dotnet-version: '10.x'
+      - uses: actions/cache@v6
+        with:
+          path: ~/.nuget/packages
+          key: nuget-fmt-${{ hashFiles('**/Directory.Packages.props') }}
+          restore-keys: nuget-fmt-
+      - run: dotnet restore CoreLibs.slnx
+      - run: dotnet format CoreLibs.slnx --verify-no-changes --no-restore
+
+  build-and-test:
+    name: Build & test (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        # Windows is not redundant here: path handling in Storage.Disk and the
+        # case-insensitive filesystem behind the Cache project names both differ there.
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '10.x'
+      - uses: actions/cache@v6
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ matrix.os }}-${{ hashFiles('**/Directory.Packages.props') }}
+          restore-keys: nuget-${{ matrix.os }}-
 
       - name: Restore
-        run: dotnet restore
+        run: dotnet restore CoreLibs.slnx
 
       - name: Build
-        run: dotnet build --no-restore --configuration Release
+        run: dotnet build CoreLibs.slnx --no-restore --configuration Release
 
-      - name: Test
+      # Integration suites are separate projects, not a trait, so they are excluded by name.
+      - name: Test (unit)
+        shell: bash
         run: |
-          dotnet test --no-build --configuration Release \
-            --verbosity normal \
-            --logger "trx;LogFileName=results.trx"
+          set -euo pipefail
+          mapfile -t projects < <(
+            find platform/tests live-config/tests localization/tests -name '*.csproj' \
+              | grep -viE 'integration' | sort)
+          for p in "${projects[@]}"; do
+            dotnet test "$p" --no-build --configuration Release \
+              --collect:"XPlat Code Coverage" --results-directory ./coverage
+          done
 
-      - name: Upload test results
-        uses: actions/upload-artifact@v4
-        if: always()
+      - uses: codecov/codecov-action@v7
+        if: matrix.os == 'ubuntu-latest'
         with:
-          name: test-results
-          path: "**/*.trx"
+          directory: ./coverage
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: false
 
-      - name: Format check
-        run: dotnet format --verify-no-changes --no-restore
+  integration:
+    name: Integration tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '10.x'
+      - uses: actions/cache@v6
+        with:
+          path: ~/.nuget/packages
+          key: nuget-integration-${{ hashFiles('**/Directory.Packages.props') }}
+          restore-keys: nuget-integration-
+
+      # These spin up MongoDB, Postgres and Redis through Testcontainers. They exist in the
+      # repository but were never actually executed by CI before.
+      - name: Test (integration, Testcontainers needs Docker)
+        run: |
+          set -euo pipefail
+          for p in $(find . -name '*.csproj' | grep -iE 'integration' | sort); do
+            dotnet test "$p" --configuration Release
+          done

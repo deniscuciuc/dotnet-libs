@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+
+    <ItemGroup>
+      <ProjectReference Include="..\CoreLibs.MongoDB\CoreLibs.MongoDB.csproj" />
+      <ProjectReference Include="..\CoreLibs.Startup\CoreLibs.Startup.csproj" />
+    </ItemGroup>
+
+</Project>

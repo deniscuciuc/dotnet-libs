@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <Description>Core engine for the CoreLibs LiveConfig framework — versioning, caching, hashing, applier orchestration, and config lifecycle management.</Description>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions"/>
+        <PackageReference Include="Microsoft.Extensions.Options"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\CoreLibs.LiveConfig.Abstractions\CoreLibs.LiveConfig.Abstractions.csproj"/>
+    </ItemGroup>
+
+</Project>

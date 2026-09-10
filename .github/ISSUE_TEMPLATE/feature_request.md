@@ -1,23 +1,17 @@
 ---
 name: Feature request
-about: Suggest an improvement or new capability.
-title: "[Feature]: "
+about: Suggest a capability or an API change
 labels: enhancement
-assignees: ''
 ---
 
-## Problem
+## The problem
 
-Describe the user or engineering problem.
+<!-- What are you trying to do that is awkward or impossible today? -->
 
-## Proposed solution
+## What you would like instead
 
-Describe the ideal API or behavior.
+<!-- A sketch of the API or behaviour you have in mind. -->
 
-## Alternatives considered
+## Alternatives you considered
 
-List other approaches you evaluated.
-
-## Additional context
-
-Include examples, prior art, or constraints.
+<!-- Including "do nothing" — say why that is not enough. -->

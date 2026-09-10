@@ -1,35 +1,25 @@
 ---
 name: Bug report
-about: Report a reproducible defect.
-title: "[Bug]: "
+about: Something does not behave the way the docs say it should
 labels: bug
-assignees: ''
 ---
 
-## Summary
+## What happened
 
-Describe the problem clearly.
+<!-- What you observed, including the exact exception or output if there was one. -->
 
-## Steps to reproduce
+## What you expected
 
-1.
-2.
-3.
+## Reproduction
 
-## Expected behavior
+<!-- The smallest snippet or steps that show the problem. A failing test is ideal. -->
 
-Describe what should have happened.
+```csharp
 
-## Actual behavior
-
-Describe what happened instead.
+```
 
 ## Environment
 
+- Package and version:
+- .NET SDK (`dotnet --version`):
 - OS:
-- Runtime / SDK / tool version:
-- Library version:
-
-## Additional context
-
-Add logs, screenshots, or a minimal repro if available.

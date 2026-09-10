@@ -1,9 +1,0 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-
-    <ItemGroup>
-      <ProjectReference Include="..\DenisCuciuc.Platform.Postgres\DenisCuciuc.Platform.Postgres.csproj" />
-      <ProjectReference Include="..\DenisCuciuc.Platform.Startup\DenisCuciuc.Platform.Startup.csproj" />
-    </ItemGroup>
-
-</Project>
