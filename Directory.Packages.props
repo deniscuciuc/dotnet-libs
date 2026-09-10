@@ -1,0 +1,19 @@
+<Project>
+  <PropertyGroup>
+    <!--
+      Versions are managed per module (platform/, live-config/, localization/ each own a
+      Directory.Packages.props). This root file exists only to pin transitive dependencies
+      that carry published security advisories, repo-wide.
+    -->
+    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+  </PropertyGroup>
+
+  <ItemGroup Label="Transitive security pins">
+    <!-- GHSA-v5pm-xwqc-g5wc (high), patched in 2.7.5. Pulled in by Swashbuckle and Microsoft.AspNetCore.OpenApi. -->
+    <PackageVersion Include="Microsoft.OpenApi" Version="2.12.2" />
+    <!-- GHSA-6c8g-7p36-r338 (moderate), patched in 0.48.0. Pulled in by Docker.DotNet via Testcontainers. -->
+    <PackageVersion Include="SharpCompress" Version="0.50.4" />
+    <!-- GHSA-q939-rpr3-3284 (high), patched in 2026.0.0. Pulled in by Testcontainers. -->
+    <PackageVersion Include="SSH.NET" Version="2026.0.0" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,132 @@
+liveconfig:
+  criticalConfigTypes:
+    - bonuses
+    - game-settings
+    - Currencies
+    - Items
+    - ItemPrices
+    - ItemBundles
+    - TournamentRewards
+    - Tournaments
+  pollingInterval: "00:05:00"
+  enablePollingFallback: false
+  enablePreload: true
+  preloadSourceName: gsheet
+  forceSourceRefresh: true
+  retry:
+    maxRetries: 3
+    initialDelay: "00:00:00.250"
+    maxDelay: "00:00:05"
+
+  store:
+    mongodb:
+      collectionName: config_snapshots
+
+  retention:
+    enabled: true
+    maxVersions: 30
+    maxAge: "7.00:00:00"
+    keepActiveAlways: true
+
+  redis:
+    keyPrefix: liveconfig
+    notificationChannel: "liveconfig:updated"
+
+  hosting:
+    importQueueName: liveconfig-import
+    rollbackQueueName: liveconfig-rollback
+    enableMqConsumers: true
+    enableRedisSubscriber: true
+      
+  gsheet:
+   spreadsheetId: "YOUR_GOOGLE_SPREADSHEET_ID"
+   applicationName: "LiveConfig-Example"
+   failOnImportErrors: true
+   failOnValidationErrors: false
+   credentials:
+     method: Base64JsonFromConfiguration
+     value: "ewogICJ0eXBlIjogInNlcnZpY2VfYWNjb3VudCIsCiAgInByb2plY3RfaWQiOiAibGVhcm5pbmct
+            NDkyNTA5IiwKICAicHJpdmF0ZV9rZXlfaWQiOiAiMjk0MzI5ZDVlOGJhNjIyODEyNmNhYTNiMjU4
+            YmNhZjMxZWJmNjIxNSIsCiAgInByaXZhdGVfa2V5IjogIi0tLS0tQkVHSU4gUFJJVkFURSBLRVkt
+            LS0tLVxuTUlJRXZRSUJBREFOQmdrcWhraUc5dzBCQVFFRkFBU0NCS2N3Z2dTakFnRUFBb0lCQVFD
+            b0ttUzFTWmxiZUFmeFxuWm9MVXZMaGUvOFVjelV6SnUyZHRReXE5VWprK1dMRXdkcmUrOTBlVkRq
+            aW51cXJsS2FrSUJVZXVVV2h6SG5iTFxuQVVpbEo1WHUzUDRZUlJmazAwTlhIZU9IWVI3ZTNnWEY3
+            RkpZdzI1K3VVL2QxMHlZRUZEQlMxWkI1OWMyK3pYd1xuTFZXZVFMQlpJTzk1V1gvbWpzbTE1dnVQ
+            UnljV0hBMWo2YklzNnVOSmEwRHUrenhFWWw1ZFRxMzNNelN4emNqTlxuUUxkdUdrKzFsNVdSeTVt
+            Uks4NXo5SXZnYjRIeFRXMDlwUWExL2kvTkJRclo2eEg5ZDhGVUttUGZpVTMwaEhXcFxuSnI1UDkr
+            TVpsNmFmVjM2eWNsYmhLeDhlS2dsQzRiOWpQOHBURnB2R2x5SG5Fc3k4NmtqVTJCN0E3d3Nwa2FQ
+            L1xubnFJYjY0YTlBZ01CQUFFQ2dnRUFQamd4T3NJWWM3ZGRlUHVzdkhsMjNlOVVSdXZPMVhUNU4z
+            djZmRUhIM0VHRVxuamFIZktsRGpzMHFudTZkZFE1eStaYkZPYkRqQ3BKVkk3cU55OVdoSUdUQzY4
+            cy9kbjFSclBmaFpEdVhvUGgxM1xubFZ0eXZGVFN0U0JyWkhFY2JjYmJtaWo5cVRUV2RBbE9VNmJ5
+            WHJNZ2pGbWJRUkxVTjhIczc5aWVpc3lRc2FUbFxuNHlQWFladnhZM3ozWWwxaFFWWSszZFlHYzU3
+            cEdyMWRNK0l5ZVJ0bFVaYnkyNnUwajhvQkFWalF4d2dwdjJPdVxubytwMjk5Mmc5U2owZUZxMUtE
+            WEVodG4vK2xhd0k2NWgzZjl4Y3hjNVBaVU41MDNwUGZ2WjhRN3cwREljM2U5NFxuWW5JNXFhLzlv
+            dm5jQmlSNGVQR3FFVVh4Y0xXczlBRVU1VEFKY0tGZUlRS0JnUURSNnBEbExlU3BYT3gyQkFCMlxu
+            WU5nc0JtUVRtRXhKUEpBTnUrUkptOW9IaWJBYlBSeTVhcjdVaXJCLzRDUW1YV1ljQzFhcnU5M1lF
+            dTZDSGFFNFxuTmhRTUNRdkdscDBkZmFRZW5Da0VGbXlWOXBVdlNrOTZuSWVCWjZYNlF6MGFVOE9h
+            TEx2SFgwcmF5SG01d0cxZ1xuZzk3SnBkU09YMTMwS3JJcXIyYWNhQmJ6S3dLQmdRRE5GV2xwc28x
+            cWZxRWpSVTFXVkhnSkZHVHc3T2g1Z05RU1xuTjh3RXpVcFpidXU5QnVqN1pOdHhOL2ErTnU0d2dm
+            RE1MT09SRjNoWGgwNlpScVRCclVLaVUxUHIzekVxM1cxVVxubzcxS05Bd08xcXplNjFTelROanQx
+            UHRJMkRFZndITWhaRm1uUlhPcks2VDZBNnlkMUJlSytpUTR1YXNnM0JpUFxuU3BlbGFRMlp0d0tC
+            Z0ZGdFdoTnNmL3lxalJjaWFrT0JRWm1pU1FQSTJoNjJuWEtXWmZHZndTMlhYWGJUZCtiOFxuMzFW
+            M0R3d3JtQnBCdExCQVBiaVVRWFBsdEJ0SS94YmM4MTNQekgrV1FSQUZncnBVL1J3V3pyeEZVSTF0
+            bC9NSlxuOFE1amRHRGw0RGZzTWo0R0NEbElYN01LZlIxdTVYN0E2SlR6L01YVmZJNlFXVmh4ZmE1
+            Q09sVE5Bb0dBSVo3NVxuQVJMOGpCRG1hZG5hcStSOUtUL21ySGlxUkFFU3cwblNjSmNYTVVJMTgy
+            OUdrckFlS1psN0lnUHZXSlIwM1lRZVxuYXBMbWI3TUc5Nm5WS01zMnVWWGYxRE5xNUJRWThGOUhr
+            UHFuWDJkaVA4bGt3V0Evei8yeWxHYWM1dyt0MERPYlxuWHdqTHhhd0tCOUxDWWIxN2ZwVXppdmts
+            VE9YSVFQV0JsdVI2RGxFQ2dZRUF2VlVmUE8zWGQ2MkhWcEc1U08rdFxuTXBaRXdKWi9Md29wK2JK
+            djlocXEyeEFnNm1NRVMrSXpLLzArOUZMS0FGdEduQ2FtRWh1TFpJeHNGRDcrdGQ4Q1xuNHJXSWc2
+            UHl4K1RGL1ZvbTFES3UySnBsclJtWWl6dDFnNmV6bTB1bUZwMHVnTDdFSE1EMEFQV0xWcDdDZXVo
+            NFxuYm9QSDI3Qkw4SUI5TFNDUkcvT1BzMHM9XG4tLS0tLUVORCBQUklWQVRFIEtFWS0tLS0tXG4i
+            LAogICJjbGllbnRfZW1haWwiOiAibGVhcm5pbmdAbGVhcm5pbmctNDkyNTA5LmlhbS5nc2Vydmlj
+            ZWFjY291bnQuY29tIiwKICAiY2xpZW50X2lkIjogIjEwNDE3MDI4Mzc0Mzc3NDk4NDIxMSIsCiAg
+            ImF1dGhfdXJpIjogImh0dHBzOi8vYWNjb3VudHMuZ29vZ2xlLmNvbS9vL29hdXRoMi9hdXRoIiwK
+            ICAidG9rZW5fdXJpIjogImh0dHBzOi8vb2F1dGgyLmdvb2dsZWFwaXMuY29tL3Rva2VuIiwKICAi
+            YXV0aF9wcm92aWRlcl94NTA5X2NlcnRfdXJsIjogImh0dHBzOi8vd3d3Lmdvb2dsZWFwaXMuY29t
+            L29hdXRoMi92MS9jZXJ0cyIsCiAgImNsaWVudF94NTA5X2NlcnRfdXJsIjogImh0dHBzOi8vd3d3
+            Lmdvb2dsZWFwaXMuY29tL3JvYm90L3YxL21ldGFkYXRhL3g1MDkvbGVhcm5pbmclNDBsZWFybmlu
+            Zy00OTI1MDkuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb20iLAogICJ1bml2ZXJzZV9kb21haW4iOiAi
+            Z29vZ2xlYXBpcy5jb20iCn0K"
+
+MongoDB:
+  ConnectionString: "mongodb://localhost:27017/liveconfig_example"
+
+Redis:
+  ConnectionString: "localhost:6379"
+
+RabbitMq:
+  Host: "localhost"
+
+Example:
+  SourceMode: gsheet
+
+Serilog:
+  Using:
+    - Serilog.Sinks.Console
+    - Serilog.Expressions
+  MinimumLevel:
+    Default: Information
+    Override:
+      Microsoft.AspNetCore.Hosting.Diagnostics: Warning
+      Microsoft.AspNetCore.Routing.EndpointMiddleware: Warning
+      Microsoft.AspNetCore.Server.Kestrel: Warning
+      CoreLibs.LiveConfig.LiveConfigEngine: Debug
+      CoreLibs.LiveConfig.CacheConfigApplier: Information
+      CoreLibs.LiveConfig.GSheet: Information
+      CoreLibs.LiveConfig.GSheet.GSheetConnector: Debug
+      CoreLibs.LiveConfig.GSheet.GSheetParserService: Debug
+      CoreLibs.LiveConfig.GSheet.Pipeline.LoggingPipelineObserver: Debug
+      CoreLibs.LiveConfig.Hosting.Consumers.ConfigImportRequestConsumer: Information
+  RequestLogging:
+    DefaultLevel: Information
+    PathLevels:
+      - Path: /health
+        Level: Debug
+      - Path: /swagger
+        Level: Debug
+      - Path: /openapi
+        Level: Debug
+      - Path: /favicon.ico
+        Level: Debug
+  WriteTo:
+    - Name: Console

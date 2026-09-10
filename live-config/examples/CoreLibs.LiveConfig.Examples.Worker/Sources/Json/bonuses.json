@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Welcome Bonus",
+    "amount": 100.00,
+    "currency": "USD",
+    "minLevel": 1,
+    "isActive": true
+  },
+  {
+    "name": "Daily Spin",
+    "amount": 10.00,
+    "currency": "USD",
+    "minLevel": 5,
+    "isActive": true
+  },
+  {
+    "name": "VIP Cashback",
+    "amount": 500.00,
+    "currency": "USD",
+    "minLevel": 20,
+    "isActive": false
+  }
+]

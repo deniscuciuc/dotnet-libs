@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.NET.Test.Sdk"/>
+        <PackageReference Include="NSubstitute"/>
+        <PackageReference Include="Testcontainers.MongoDb"/>
+        <PackageReference Include="Testcontainers.Redis"/>
+        <PackageReference Include="xunit"/>
+        <PackageReference Include="xunit.runner.visualstudio"/>
+        <PackageReference Include="coverlet.collector"/>
+        <PackageReference Include="MongoDB.Driver"/>
+        <PackageReference Include="StackExchange.Redis"/>
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\CoreLibs.Localization.Runtime\CoreLibs.Localization.Runtime.csproj"/>
+        <ProjectReference Include="..\..\src\CoreLibs.Localization.Store.MongoDB\CoreLibs.Localization.Store.MongoDB.csproj"/>
+        <ProjectReference Include="..\..\src\CoreLibs.Localization.Cache\CoreLibs.Localization.Cache.csproj"/>
+    </ItemGroup>
+</Project>

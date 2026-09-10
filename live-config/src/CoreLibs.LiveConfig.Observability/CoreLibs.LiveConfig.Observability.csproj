@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <Description>OpenTelemetry metrics and tracing for the CoreLibs LiveConfig framework.</Description>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\CoreLibs.LiveConfig.Abstractions\CoreLibs.LiveConfig.Abstractions.csproj"/>
+    </ItemGroup>
+
+</Project>

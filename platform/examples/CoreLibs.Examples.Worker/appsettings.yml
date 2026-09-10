@@ -1,0 +1,22 @@
+MQ:
+  Rabbit:
+    host: "localhost"
+    virtualHost: "/"
+    username: "guest"
+    password: "guest"
+    endpointDefaults:
+      prefetchCount: 10
+      retryCount: 3
+      retryIntervalInSeconds: 5
+
+Metrics:
+  enabled: true
+  endpointPath: "/metrics"
+
+Serilog:
+  MinimumLevel:
+    Default: Information
+    Override:
+      Microsoft.Extensions.Hosting: Warning
+  WriteTo:
+    - Name: Console

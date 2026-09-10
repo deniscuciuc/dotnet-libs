@@ -1,0 +1,9 @@
+[
+  {
+    "maxPlayers": 100,
+    "roundDurationSeconds": 60,
+    "minBetAmount": 1.00,
+    "maxBetAmount": 1000.00,
+    "maintenanceMode": false
+  }
+]

@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <ProjectReference Include="..\CoreLibs.Storage\CoreLibs.Storage.csproj" />
+        <ProjectReference Include="..\CoreLibs.Storage.Abstractions\CoreLibs.Storage.Abstractions.csproj" />
+        <ProjectReference Include="..\CoreLibs.Startup\CoreLibs.Startup.csproj" />
+    </ItemGroup>
+
+</Project>

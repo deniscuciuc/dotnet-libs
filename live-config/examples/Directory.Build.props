@@ -1,0 +1,11 @@
+<Project>
+
+    <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+
+    <ItemGroup Condition="'$(UsingMicrosoftNETSdkWeb)' != 'true'">
+        <Content Include="appsettings.yml" Condition="Exists('appsettings.yml')">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+
+</Project>

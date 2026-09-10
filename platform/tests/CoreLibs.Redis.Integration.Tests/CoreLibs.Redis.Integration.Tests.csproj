@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" />
+        <PackageReference Include="NSubstitute" />
+        <PackageReference Include="NSubstitute.Analyzers.CSharp" />
+        <PackageReference Include="Testcontainers.Redis" />
+        <PackageReference Include="xunit" />
+        <PackageReference Include="xunit.runner.visualstudio" />
+        <PackageReference Include="coverlet.collector" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\CoreLibs.Redis\CoreLibs.Redis.csproj" />
+        <ProjectReference Include="..\..\src\CoreLibs.Redis.Startup\CoreLibs.Redis.Startup.csproj" />
+        <ProjectReference Include="..\..\src\CoreLibs.Cache\CoreLibs.Cache.csproj" />
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,26 @@
+{
+  "culture": "ru",
+  "entries": {
+    "app.welcome": {
+      "value": "Добро пожаловать в CoreLibs Localization!"
+    },
+    "app.greeting": {
+      "value": "Привет, {name}!"
+    },
+    "game.items.count": {
+      "value": "Предметов: {count}",
+      "plurals": {
+        "zero": "Нет предметов",
+        "one": "{count} предмет",
+        "few": "{count} предмета",
+        "many": "{count} предметов"
+      }
+    },
+    "offers.bonus.received": {
+      "value": "Вы получили бонус {amount} {currency}!"
+    },
+    "telegram.bot.welcome": {
+      "value": "Привет, {username}! Ваш язык: {culture}."
+    }
+  }
+}

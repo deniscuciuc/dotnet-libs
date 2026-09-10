@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <Description>Google Sheets parser for CoreLibs Localization — reads translations from GSheet and feeds them into LiveConfig as LocalizationSnapshot payloads.</Description>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="CsvHelper"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions"/>
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\CoreLibs.Localization\CoreLibs.Localization.csproj"/>
+        <ProjectReference Include="..\..\..\live-config\src\CoreLibs.LiveConfig.GSheet\CoreLibs.LiveConfig.GSheet.csproj"/>
+    </ItemGroup>
+</Project>

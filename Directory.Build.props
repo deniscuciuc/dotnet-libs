@@ -1,0 +1,32 @@
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Authors>Denis Cuciuc</Authors>
+    <Company>Denis Cuciuc</Company>
+    <Copyright>© 2026 Denis Cuciuc</Copyright>
+    <RepositoryUrl>https://github.com/deniscuciuc/dotnet-libs</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+
+    <!--
+      Nothing here is published to NuGet. This repository is consumed as a git submodule
+      and referenced by relative path, so packing is off everywhere by default.
+    -->
+    <IsPackable>false</IsPackable>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+
+    <!--
+      1591/1573/1574/1570/1735 are XML-doc completeness and malformed-doc warnings. Docs are
+      generated for IntelliSense, not published, so an undocumented internal member is not
+      worth failing a build over. Vulnerability warnings (NU1901-NU1904) are NOT suppressed.
+    -->
+    <NoWarn>$(NoWarn);1591;1573;1574;1570;1735</NoWarn>
+    <NuGetAudit>true</NuGetAudit>
+    <NuGetAuditMode>all</NuGetAuditMode>
+    <NuGetAuditLevel>low</NuGetAuditLevel>
+  </PropertyGroup>
+</Project>

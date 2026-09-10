@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\CoreLibs.Configuration\CoreLibs.Configuration.csproj" />
+        <ProjectReference Include="..\..\src\CoreLibs.HealthCheck\CoreLibs.HealthCheck.csproj" />
+        <ProjectReference Include="..\..\src\CoreLibs.Metrics\CoreLibs.Metrics.csproj" />
+        <ProjectReference Include="..\..\src\CoreLibs.MQ\CoreLibs.MQ.csproj" />
+        <ProjectReference Include="..\..\src\CoreLibs.Serilog\CoreLibs.Serilog.csproj" />
+        <ProjectReference Include="..\..\src\CoreLibs.Startup\CoreLibs.Startup.csproj" />
+        <ProjectReference Include="..\..\src\CoreLibs.Swagger.Theme\CoreLibs.Swagger.Theme.csproj" />
+    </ItemGroup>
+
+</Project>

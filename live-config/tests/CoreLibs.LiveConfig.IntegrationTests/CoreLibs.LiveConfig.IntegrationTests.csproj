@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.NET.Test.Sdk"/>
+        <PackageReference Include="NSubstitute"/>
+        <PackageReference Include="Testcontainers.MongoDb"/>
+        <PackageReference Include="Testcontainers.PostgreSql"/>
+        <PackageReference Include="Testcontainers.Redis"/>
+        <PackageReference Include="xunit"/>
+        <PackageReference Include="xunit.runner.visualstudio"/>
+        <PackageReference Include="coverlet.collector"/>
+        <PackageReference Include="MongoDB.Driver"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore"/>
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL"/>
+        <PackageReference Include="StackExchange.Redis"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\CoreLibs.LiveConfig.Store.MongoDB\CoreLibs.LiveConfig.Store.MongoDB.csproj"/>
+        <ProjectReference Include="..\..\src\CoreLibs.LiveConfig.Store.Postgres\CoreLibs.LiveConfig.Store.Postgres.csproj"/>
+        <ProjectReference Include="..\..\src\CoreLibs.LiveConfig.Redis\CoreLibs.LiveConfig.Redis.csproj"/>
+    </ItemGroup>
+
+</Project>
