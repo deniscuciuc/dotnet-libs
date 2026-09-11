@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <Description>Abstractions and contracts for the CoreLibs LiveConfig framework — pluggable config sources, stores, distributors, appliers, and caches.</Description>
+        <RootNamespace>CoreLibs.LiveConfig</RootNamespace>
+    </PropertyGroup>
+
+</Project>

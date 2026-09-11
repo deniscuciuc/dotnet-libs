@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <PackageReference Include="Hangfire.Core" />
+        <PackageReference Include="Hangfire.InMemory" />
+        <PackageReference Include="Hangfire.AspNetCore" />
+        <PackageReference Include="OpenTelemetry.Api" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\CoreLibs.Jobs\CoreLibs.Jobs.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+
+</Project>

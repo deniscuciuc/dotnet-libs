@@ -1,0 +1,8 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <ProjectReference Include="..\CoreLibs.Jobs\CoreLibs.Jobs.csproj" />
+        <ProjectReference Include="..\CoreLibs.Startup\CoreLibs.Startup.csproj" />
+    </ItemGroup>
+
+</Project>

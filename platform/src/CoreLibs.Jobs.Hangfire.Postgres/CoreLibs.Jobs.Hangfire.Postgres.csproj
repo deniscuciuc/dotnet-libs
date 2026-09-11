@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <PackageReference Include="Hangfire.PostgreSql" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\CoreLibs.Jobs.Hangfire\CoreLibs.Jobs.Hangfire.csproj" />
+    </ItemGroup>
+
+</Project>

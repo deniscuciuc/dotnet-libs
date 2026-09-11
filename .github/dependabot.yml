@@ -1,0 +1,39 @@
+version: 2
+updates:
+  # One entry per module: each owns its own Directory.Packages.props, so Dependabot has to
+  # be pointed at each directory separately or it only ever sees the root security pins.
+  - package-ecosystem: "nuget"
+    directories:
+      - "/"
+      - "/platform"
+      - "/live-config"
+      - "/localization"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    groups:
+      microsoft-extensions:
+        patterns: ["Microsoft.Extensions.*"]
+      entity-framework:
+        patterns: ["Microsoft.EntityFrameworkCore*", "Npgsql*", "EFCore.*"]
+      opentelemetry:
+        patterns: ["OpenTelemetry*", "prometheus-net*"]
+      serilog:
+        patterns: ["Serilog*"]
+      test-dependencies:
+        patterns: ["xunit*", "NSubstitute", "coverlet*", "Testcontainers*", "Microsoft.NET.Test.Sdk"]
+    labels: ["dependencies"]
+    commit-message:
+      prefix: "chore(deps)"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    groups:
+      github-actions:
+        patterns: ["*"]
+    labels: ["dependencies"]
+    commit-message:
+      prefix: "ci(deps)"

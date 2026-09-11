@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <Description>Hosting infrastructure for the CoreLibs LiveConfig config manager service: MQ consumers, Redis subscriber, fluent host builder.</Description>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="MassTransit"/>
+        <PackageReference Include="MassTransit.RabbitMQ"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\CoreLibs.LiveConfig\CoreLibs.LiveConfig.csproj"/>
+        <ProjectReference Include="..\CoreLibs.LiveConfig.Startup\CoreLibs.LiveConfig.Startup.csproj"/>
+        <ProjectReference Include="..\..\..\platform\src\CoreLibs.Redis\CoreLibs.Redis.csproj"/>
+    </ItemGroup>
+
+</Project>

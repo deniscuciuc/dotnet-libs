@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+<ItemGroup>
+        <ProjectReference Include="..\..\src\CoreLibs.Localization.Runtime\CoreLibs.Localization.Runtime.csproj"/>
+        <ProjectReference Include="..\..\src\CoreLibs.Localization.LiveConfig\CoreLibs.Localization.LiveConfig.csproj"/>
+        <ProjectReference Include="..\..\src\CoreLibs.Localization.LiveConfig.Json\CoreLibs.Localization.LiveConfig.Json.csproj"/>
+        <ProjectReference Include="..\..\src\CoreLibs.Localization.LiveConfig.GSheet\CoreLibs.Localization.LiveConfig.GSheet.csproj"/>
+        <ProjectReference Include="..\..\src\CoreLibs.Localization.Store.MongoDB\CoreLibs.Localization.Store.MongoDB.csproj"/>
+        <ProjectReference Include="..\..\src\CoreLibs.Localization.Store.Postgres\CoreLibs.Localization.Store.Postgres.csproj"/>
+        <ProjectReference Include="..\..\src\CoreLibs.Localization.Cache\CoreLibs.Localization.Cache.csproj"/>
+        <ProjectReference Include="..\..\src\CoreLibs.Localization.Telegram\CoreLibs.Localization.Telegram.csproj"/>
+        <ProjectReference Include="..\..\..\live-config\src\CoreLibs.LiveConfig.Startup\CoreLibs.LiveConfig.Startup.csproj"/>
+        <ProjectReference Include="..\..\..\platform\src\CoreLibs.Configuration\CoreLibs.Configuration.csproj"/>
+    </ItemGroup>
+    <ItemGroup>
+        <None Update="appsettings.yml">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="locales\**\*">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="configs\**\*">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+</Project>

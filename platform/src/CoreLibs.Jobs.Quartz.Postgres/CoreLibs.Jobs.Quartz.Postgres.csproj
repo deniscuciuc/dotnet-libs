@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <PackageReference Include="Quartz.Serialization.SystemTextJson" />
+        <PackageReference Include="Npgsql" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\CoreLibs.Jobs.Quartz\CoreLibs.Jobs.Quartz.csproj" />
+    </ItemGroup>
+
+</Project>

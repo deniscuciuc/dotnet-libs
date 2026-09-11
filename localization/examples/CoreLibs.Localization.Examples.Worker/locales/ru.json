@@ -1,0 +1,58 @@
+{
+  "app.welcome": {
+    "value": "Добро пожаловать в CoreLibs Localization!"
+  },
+  "app.greeting": {
+    "value": "Привет, {name}!"
+  },
+  "app.description": {
+    "value": "Движок локализации CoreLibs с поддержкой plural-форм, интерполяции и Redis-кэша."
+  },
+  "game.items.count": {
+    "value": "Предметов: {count}",
+    "plurals": {
+      "zero": "Нет предметов",
+      "one": "{count} предмет",
+      "few": "{count} предмета",
+      "many": "{count} предметов"
+    }
+  },
+  "game.players.online": {
+    "value": "Игроков онлайн: {count}",
+    "plurals": {
+      "zero": "Нет игроков онлайн",
+      "one": "{count} игрок онлайн",
+      "few": "{count} игрока онлайн",
+      "many": "{count} игроков онлайн"
+    }
+  },
+  "game.level": {
+    "value": "Уровень {level}",
+    "plurals": {
+      "one": "{count} уровень",
+      "few": "{count} уровня",
+      "many": "{count} уровней"
+    }
+  },
+  "offers.bonus.received": {
+    "value": "Вы получили бонус {amount} {currency}!"
+  },
+  "offers.welcome.title": {
+    "value": "Добро пожаловать, {name}!"
+  },
+  "offers.daily_reward": {
+    "value": "Ваша ежедневная награда: {amount} монет."
+  },
+  "errors.not_found": {
+    "value": "Не найдено: {resource}"
+  },
+  "errors.access_denied": {
+    "value": "Доступ запрещён."
+  },
+  "telegram.bot.welcome": {
+    "value": "Привет, {username}! Ваш язык: {culture}."
+  },
+  "telegram.bot.culture_set": {
+    "value": "Язык изменён на «{culture}»."
+  }
+}

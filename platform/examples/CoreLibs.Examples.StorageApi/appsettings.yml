@@ -1,0 +1,26 @@
+Storage:
+  provider: S3
+  S3:
+    endpoint: "http://localhost:9000"
+    accessKey: "minioadmin"
+    secretKey: "minioadmin"
+    forcePathStyle: true
+    region: "us-east-1"
+    buckets:
+      - uploads
+
+Sentry:
+  enabled: false
+  dsn: ""
+
+Metrics:
+  enabled: true
+  endpointPath: "/metrics"
+
+Serilog:
+  MinimumLevel:
+    Default: Information
+    Override:
+      Microsoft.AspNetCore: Warning
+  WriteTo:
+    - Name: Console

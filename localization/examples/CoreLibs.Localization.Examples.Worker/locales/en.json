@@ -1,0 +1,55 @@
+{
+  "app.welcome": {
+    "value": "Welcome to CoreLibs Localization!"
+  },
+  "app.greeting": {
+    "value": "Hello, {name}!"
+  },
+  "app.description": {
+    "value": "CoreLibs localization engine with plural support, interpolation, and Redis cache."
+  },
+  "game.items.count": {
+    "value": "Items: {count}",
+    "plurals": {
+      "zero": "No items",
+      "one": "{count} item",
+      "other": "{count} items"
+    }
+  },
+  "game.players.online": {
+    "value": "Players online: {count}",
+    "plurals": {
+      "zero": "No players online",
+      "one": "{count} player online",
+      "other": "{count} players online"
+    }
+  },
+  "game.level": {
+    "value": "Level {level}",
+    "plurals": {
+      "one": "{count} level",
+      "other": "{count} levels"
+    }
+  },
+  "offers.bonus.received": {
+    "value": "You received a bonus of {amount} {currency}!"
+  },
+  "offers.welcome.title": {
+    "value": "Welcome, {name}!"
+  },
+  "offers.daily_reward": {
+    "value": "Your daily reward: {amount} coins."
+  },
+  "errors.not_found": {
+    "value": "Not found: {resource}"
+  },
+  "errors.access_denied": {
+    "value": "Access denied."
+  },
+  "telegram.bot.welcome": {
+    "value": "Hello, {username}! Your language: {culture}."
+  },
+  "telegram.bot.culture_set": {
+    "value": "Language changed to \"{culture}\"."
+  }
+}
