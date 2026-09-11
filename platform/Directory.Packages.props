@@ -93,7 +93,7 @@
 
   <ItemGroup Label="Observability">
     <PackageVersion Include="OpenTelemetry" Version="1.15.1" />
-    <PackageVersion Include="OpenTelemetry.Api" Version="1.15.3" />
+    <PackageVersion Include="OpenTelemetry.Api" Version="1.18.0" />
     <PackageVersion Include="OpenTelemetry.Api.ProviderBuilderExtensions" Version="1.15.3" />
     <PackageVersion Include="OpenTelemetry.Extensions.Propagators" Version="1.15.3" />
     <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.15.1" />
