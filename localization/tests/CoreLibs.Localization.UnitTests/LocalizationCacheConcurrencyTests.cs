@@ -96,34 +96,42 @@ public sealed class LocalizationCacheConcurrencyTests
     [Fact]
     public async Task ReadsDuringWrites_NeverObserveAPartialSnapshot()
     {
+        const int writes = 20_000;
+
         var cache = new LocalizationCache();
         cache.Update("en", new Dictionary<string, LocalizationValue> { ["k"] = new() { Value = "v0" } });
 
-        using var cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(300));
-
+        // A fixed iteration count rather than a wall-clock deadline: the assertion is about
+        // the atomicity of the swap, and a time-boxed loop would make the test's outcome
+        // depend on how loaded the machine is.
         var writer = Task.Run(() =>
         {
-            var i = 0;
-            while (!cts.IsCancellationRequested)
+            for (var i = 1; i <= writes; i++)
             {
                 cache.Update("en", new Dictionary<string, LocalizationValue>
                 {
-                    ["k"] = new() { Value = $"v{++i}" }
+                    ["k"] = new() { Value = $"v{i}" }
                 });
             }
         });
 
         var reader = Task.Run(() =>
         {
-            while (!cts.IsCancellationRequested)
+            for (var i = 0; i < writes; i++)
             {
+                // Every observed snapshot must be one a writer actually published: the
+                // culture present, the key present, and the value one of the "v{n}" writes.
                 var provider = cache.GetProvider("en");
                 Assert.NotNull(provider);
                 Assert.True(provider.TryGet("k", out var value));
-                Assert.StartsWith("v", value!.Value, StringComparison.Ordinal);
+                Assert.NotNull(value);
+                Assert.StartsWith("v", value.Value, StringComparison.Ordinal);
+                Assert.True(int.TryParse(value.Value.AsSpan(1), out var n) && n >= 0 && n <= writes);
             }
         });
 
         await Task.WhenAll(writer, reader);
+
+        Assert.Equal($"v{writes}", cache.GetProvider("en")!.GetAll()["k"].Value);
     }
 }

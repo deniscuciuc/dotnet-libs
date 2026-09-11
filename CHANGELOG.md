@@ -8,6 +8,26 @@ tags on `main` and consumers move their submodule pointer to adopt one.
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-09-11
+
+### Changed
+
+- Dependencies brought current across all three modules, including `MongoDB.Driver` 3.11.2,
+  `Npgsql` 10.0.3, EF Core 10.0.12, `StackExchange.Redis` 3.2.0, `Serilog.AspNetCore` 10.0.0,
+  `Sentry` 6.10.0, OpenTelemetry 1.18.0, `Polly` 8.7.0, `Hangfire` 1.8.25 and
+  `Testcontainers` 4.15.0.
+- **MassTransit is pinned to 8.5.8 deliberately.** Version 9 dropped Apache-2.0 for a
+  proprietary licence, the same move MediatR made at v13. 8.5.8 is the last Apache-2.0
+  release. `MediatR` stays at 12.1.1 for the same reason.
+- **Quartz is pinned to 3.17.1 deliberately.** Quartz 4 reworked its API — `IJob.Execute`
+  returns `ValueTask` and takes a `CancellationToken`, `JobListenerSupport` is gone,
+  `IJobExecutionContext` lost `Put`/`Get`, and `ScheduleJob` takes a `ScheduleJobOptions`.
+  Adapting `CoreLibs.Jobs.Quartz` to it is a piece of work in its own right, not a dependency
+  bump. 3.17.1 is current, maintained and Apache-2.0, with no open advisories.
+- **`Microsoft.OpenApi` is held at 2.12.2 deliberately.** It is a transitive security pin for
+  GHSA-v5pm-xwqc-g5wc (patched in 2.7.5), and version 3 breaks the ASP.NET Core OpenAPI
+  source generator, which is built against 2.x.
+
 ## [1.0.0] - 2026-09-11
 
 Initial release of CoreLibs: three libraries that most of my .NET services are built on —
@@ -54,5 +74,6 @@ writers.
 The MongoDB integration suite pins `mongo:7.0` — `mongo:8.0` refuses to start on Linux 6.19
 and newer ([SERVER-121912](https://jira.mongodb.org/browse/SERVER-121912)).
 
-[Unreleased]: https://github.com/deniscuciuc/dotnet-libs/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/deniscuciuc/dotnet-libs/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/deniscuciuc/dotnet-libs/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/deniscuciuc/dotnet-libs/releases/tag/v1.0.0
