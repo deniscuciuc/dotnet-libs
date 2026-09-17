@@ -88,7 +88,7 @@
   </ItemGroup>
 
   <ItemGroup Label="Resilience">
-    <PackageVersion Include="Polly" Version="8.7.0" />
+    <PackageVersion Include="Polly" Version="8.8.0" />
   </ItemGroup>
 
   <ItemGroup Label="Observability">
