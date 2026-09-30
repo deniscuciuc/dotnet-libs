@@ -81,7 +81,7 @@ await app.RunWithStartupAsync();         // ordered startup tasks run before the
 | Project | Purpose |
 |---|---|
 | `CoreLibs.Configuration` | YAML configuration pipeline with convention-based typed options |
-| `CoreLibs.Startup` | Ordered startup orchestration and fail-fast guards before `Host.RunAsync` |
+| `CoreLibs.Startup` | Ordered startup orchestration and fail-fast guards before `Host.RunAsync` (or without running the host, for CLIs and jobs) |
 | `CoreLibs.Domain` | `Entity`, domain events, auditing and soft-delete primitives |
 | `CoreLibs.CQRS` | MediatR + FluentValidation + ErrorOr request pipeline with caching behaviours |
 | `CoreLibs.Cache` | Cache abstractions shared by the Redis and Mongo layers |
@@ -94,7 +94,7 @@ await app.RunWithStartupAsync();         // ordered startup tasks run before the
 | `CoreLibs.Jobs[.Hangfire|.Quartz]` | Background jobs with MongoDB and Postgres stores |
 | `CoreLibs.ErrorHandling` | Exception middleware and `ErrorOr` → `IResult` mapping |
 | `CoreLibs.HealthCheck`, `.Metrics`, `.Serilog`, `.Sentry` | Observability |
-| `CoreLibs.Swagger.Theme` | Swashbuckle registration with a dark theme |
+| `CoreLibs.Swagger.Theme` | Dark-themed Swagger UI, for Swashbuckle or for ASP.NET Core's built-in OpenAPI documents |
 
 Every component ships a matching `*.Startup` project that registers it into the startup
 orchestrator. Docs: [`platform/docs/`](platform/docs/).

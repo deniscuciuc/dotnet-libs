@@ -8,6 +8,16 @@ tags on `main` and consumers move their submodule pointer to adopt one.
 
 ## [Unreleased]
 
+### Added
+
+- `CoreLibs.Startup`: `IHost.RunStartupTasksAsync()` runs the pre-startup hook and the ordered
+  `IStartup` tasks without starting the host, for hosts that run once and exit (CLI tools,
+  scheduled jobs). `RunWithStartupAsync()` now calls it, then runs the host; its behaviour is
+  unchanged.
+- `CoreLibs.Swagger.Theme`: `UseCoreSwaggerUI(documentUrl, routePrefix, title)` serves the
+  dark-themed Swagger UI for a document generated elsewhere, such as ASP.NET Core's built-in
+  `MapOpenApi()`, without registering Swashbuckle's generator.
+
 ## [1.0.1] - 2026-09-11
 
 ### Changed
