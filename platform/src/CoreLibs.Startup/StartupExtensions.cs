@@ -80,6 +80,21 @@ public static class StartupExtensions
         Func<IHostStartup, Task>? preStartup = null,
         CancellationToken cancellationToken = default)
     {
+        await application.RunStartupTasksAsync(preStartup, cancellationToken);
+        await application.RunAsync(cancellationToken);
+    }
+
+    /// <summary>
+    /// Runs the pre-startup hook and all <see cref="IStartup"/> tasks, exactly like
+    /// <see cref="RunWithStartupAsync"/>, but does <b>not</b> start the host. For hosts that
+    /// run once and exit (CLI tools, scheduled jobs): build the host, run the startup tasks,
+    /// then resolve services and do the work.
+    /// </summary>
+    public static async Task RunStartupTasksAsync(
+        this IHost application,
+        Func<IHostStartup, Task>? preStartup = null,
+        CancellationToken cancellationToken = default)
+    {
         var host = new HostStartupImpl(application);
 
         // Pre-startup hook (infrastructure wiring: MongoDB, Redis, …)
@@ -109,8 +124,6 @@ public static class StartupExtensions
             host.Logger.LogInformation("Completed startup task {Task}",
                 task.GetType().Name);
         }
-
-        await application.RunAsync(cancellationToken);
     }
 
     // -------------------------------------------------------------------------
