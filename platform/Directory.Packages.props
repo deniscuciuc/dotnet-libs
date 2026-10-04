@@ -115,8 +115,8 @@
     <PackageVersion Include="Hangfire.InMemory" Version="1.0.0" />
     <PackageVersion Include="Hangfire.Mongo" Version="1.16.2" />
     <PackageVersion Include="Hangfire.PostgreSql" Version="1.21.1" />
-    <PackageVersion Include="Quartz" Version="3.17.1" />
-    <PackageVersion Include="Quartz.Extensions.DependencyInjection" Version="3.17.1" />
+    <PackageVersion Include="Quartz" Version="4.1.0" />
+    <PackageVersion Include="Quartz.Extensions.DependencyInjection" Version="4.1.0" />
     <PackageVersion Include="Quartz.Extensions.Hosting" Version="3.17.1" />
     <PackageVersion Include="Quartz.Serialization.SystemTextJson" Version="3.17.1" />
     <PackageVersion Include="Reddoxx.Quartz.MongoDbJobStore" Version="3.0.0-rc1" />
