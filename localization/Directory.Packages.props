@@ -9,7 +9,7 @@
   <ItemGroup Label="Localization">
     <PackageVersion Include="coverlet.collector" Version="10.0.1" />
     <PackageVersion Include="CsvHelper" Version="33.1.0" />
-    <PackageVersion Include="Dapper" Version="2.1.79" />
+    <PackageVersion Include="Dapper" Version="2.1.86" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.12" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.12" />
     <PackageVersion Include="Microsoft.Extensions.Logging" Version="10.0.12" />

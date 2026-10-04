@@ -9,7 +9,7 @@
   <ItemGroup Label="LiveConfig">
     <PackageVersion Include="coverlet.collector" Version="10.0.1" />
     <PackageVersion Include="CsvHelper" Version="33.1.0" />
-    <PackageVersion Include="Dapper" Version="2.1.79" />
+    <PackageVersion Include="Dapper" Version="2.1.86" />
     <PackageVersion Include="Google.Apis.Sheets.v4" Version="1.75.0.4178" />
     <PackageVersion Include="MassTransit" Version="8.5.8" />
     <PackageVersion Include="MassTransit.RabbitMQ" Version="8.5.8" />
